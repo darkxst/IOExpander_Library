@@ -6,7 +6,6 @@
 GasBreakout::GasBreakout(TwoWire& wire, uint8_t address, float brightness, uint32_t timeout, int8_t interruptPin, bool debug)
 : _ioe(wire, address, timeout, interruptPin, debug)
 , _brightness(brightness)
-, _interruptPin(interruptPin)
 {    
 }
 
@@ -20,8 +19,6 @@ bool GasBreakout::initialise(bool skipChipIdCheck)
   bool bSucceeded = false;
   if(_ioe.initialise(skipChipIdCheck))
   {
-    if(_interruptPin != -1)
-      _ioe.enableInterruptOut(true);
       
     _ioe.setMode(MICS6814_RED, IOExpander::PIN_ADC);
     _ioe.setMode(MICS6814_NH3, IOExpander::PIN_ADC);
@@ -50,12 +47,6 @@ void GasBreakout::setAddr(uint8_t i2cAddr)
 {
   _ioe.setAddr(i2cAddr);
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-void GasBreakout::setInterruptCallback(void (*callback)())
-{
-  _ioe.setInterruptCallback(callback);
-}
   
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 void GasBreakout::setBrightness(float brightness)
@@ -74,12 +65,6 @@ void GasBreakout::setRGB(uint8_t r, uint8_t g, uint8_t b)
   _ioe.output(PIN_RED, r, false);   //Hold off pwm load until the last
   _ioe.output(PIN_GREEN, g, false); //Hold off pwm load until the last
   _ioe.output(PIN_BLUE, b);         //Loads all 3 pwms
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-bool GasBreakout::available(void)
-{
-  return (_ioe.getInterruptFlag() > 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

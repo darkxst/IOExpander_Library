@@ -70,7 +70,6 @@ public:
   //Calls through to IOExpander class
   //--------------------------------------------------
   void setAddr(uint8_t i2cAddr);
-  void setInterruptCallback(void (*callback)());
   
   //--------------------------------------------------
   //MIC6814 Gas Breakout specific
@@ -78,8 +77,6 @@ public:
   
   void setBrightness(float brightness);
   void setRGB(uint8_t r, uint8_t g, uint8_t b);
-
-  bool available(void);
 
   Reading readAll(uint32_t adcTimeout = DEFAULT_ADC_TIMEOUT);
   float readReducing(uint32_t adcTimeout = DEFAULT_ADC_TIMEOUT);
@@ -94,7 +91,6 @@ private:
 private:
   IOExpander _ioe;
   float _brightness;
-  int8_t _interruptPin;
 };
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////
