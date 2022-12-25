@@ -13,7 +13,7 @@ class mics6814 : public PollingComponent {
  public:
   Sensor *red_sensor = new Sensor();
   Sensor *nh3_sensor = new Sensor();
-  Sensor *oxd_sensor = new Sensor();
+  Sensor *ox_sensor = new Sensor();
 
   mics6814() : PollingComponent(DELAY_MS) { }
 
@@ -44,7 +44,7 @@ class mics6814 : public PollingComponent {
 
     red_sensor->publish_state(reading.reducing);
     nh3_sensor->publish_state(reading.nh3);
-    oxd_sensor->publish_state(reading.oxidising);
+    ox_sensor->publish_state(reading.oxidising);
   
   }
 };

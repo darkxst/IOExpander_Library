@@ -2,6 +2,7 @@ esphome:
   includes:
     - mics6814.h
   libraries:
+    - Wire
     - https://github.com/darkxst/IOExpander_Library.git
 
 # Example configuration entry
